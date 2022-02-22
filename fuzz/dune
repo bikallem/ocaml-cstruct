@@ -1,6 +1,6 @@
 (executable
  (name fuzz)
- (libraries cstruct bigarray cstruct-sexp crowbar fmt))
+ (libraries cstruct cstruct-sexp crowbar fmt))
 
 (rule
  (alias fuzz)
@@ -8,5 +8,13 @@
   fuzz.exe
   (source_tree input))
  (action
-  (run timeout --preserve-status 30m bun -v --input=input --output=output --
-    ./fuzz.exe)))
+  (run
+   timeout
+   --preserve-status
+   30m
+   bun
+   -v
+   --input=input
+   --output=output
+   --
+   ./fuzz.exe)))
